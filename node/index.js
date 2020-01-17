@@ -4,6 +4,7 @@ const router=require('./config/routes')
 const cors=require('cors')
 const app=express()
 const port=3025
+const socket=require('socket.io')
 app.use(express.json())
 configureDB()
 app.use(cors())
@@ -12,6 +13,13 @@ app.get('/',(req,res)=>{
 })
 app.use('/',router)
 
-app.listen(port,()=>{
+const server=app.listen(port,()=>{
     console.log('listening on port',port)
 })
+
+const io = socket(server);
+
+io.on('connection', (socket) => {
+    console.log('hii')
+    console.log(socket.id);
+});

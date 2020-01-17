@@ -36,26 +36,4 @@ var parentSchema=new Schema({
 })
 const Parent=mongoose.model('parent',parentSchema)
 
-var values = {time:date, children: [{ name: 'Mongoose Tutorial', origin: 'bangalore', destination: 'mysore',timeStamp:date },
-{ name: 'NodeJS tutorial', origin: 'delhi', destination: 'indore',timeStamp:date },
-{ name: 'MongoDB Tutorial', origin: 'kolkata', destination: 'darjeling',timeStamp:date }]};
-
-setInterval(()=>{
-    //console.log(values)
-    Parent.collection.insertOne(values, function (err, data) {
-        if (err){ 
-            return console.error(err);
-            } else {
-            //console.log(data)
-            console.log("Multiple documents inserted to Collection");
-            return
-            }
-    });    
-    //console.log('exit')
-},5000)
-
-
-
-
-
 module.exports=Parent

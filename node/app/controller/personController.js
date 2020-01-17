@@ -28,8 +28,8 @@ module.exports.show=(req,res)=>{
 
 module.exports.create=(req,res)=>{
     const body=req.body
-    const parent=new Book(body)
-    Parent.save()
+    const parent=new Parent(body)
+    parent.save()
     .then((book)=>{
         res.json(book)
     })
