@@ -17,6 +17,6 @@ function data(){
         .catch((err)=>{
             console.log(err)
         })
-    },10000)
+    },60000)
 }
 console.log(data())
