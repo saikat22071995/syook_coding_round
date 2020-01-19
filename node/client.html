@@ -1,0 +1,77 @@
+<!Doctype html>
+<html>
+    <head>
+        <title>realtime data Fetch</title>
+    </head>
+    <body>
+        <div id="root">
+           
+
+        </div>
+        <!-- https://unpkg.com/react@16.10.2/umd/react.development.js -->
+        <script src="./js/react.development.js"></script>
+
+        <!-- https://unpkg.com/react-dom@16.10.2/umd/react-dom.development.js -->
+        <script src="./js/react-dom.development.js"></script>
+        <script src="./js/babel.js"></script>
+
+        <!-- https://unpkg.com/axios@0.19.0/dist/axios.js -->
+        <script src="./js/axios.js"></script>
+
+        <script type="text/babel">
+            const rootHandle=document.getElementById('root')
+            class Users extends React.Component {
+               
+            constructor() {
+                super()
+                this.state = {
+                    persons: []
+                }
+            }
+
+            // only after the first render
+            componentDidMount() {           
+                axios.get('http://localhost:3025/persons')
+                .then((response)=>{
+                    const persons=response.data
+                    console.log(persons)
+                    this.setState({persons})
+                })
+                .catch((err)=>{
+                    console.log(err)
+                })
+
+
+                
+            }
+
+            render() {
+                //console.log('render', this.state)
+                // var socket = new WebSocket('ws://socket.server.com');
+
+                // socket.onmessage = function(evt){
+                // alert("I got data: " + evt.data)
+                //}
+
+                
+                return (
+                    <div>
+                        <h2> Listing persons - { this.state.persons.length } </h2>
+                        <ul>
+                            { this.state.users.map(function(user,index){
+                                return <li key={index}> { user.time } </li>
+                                user.children.map(function(key,index){
+                                    return <p>{key.name}</p>
+                                })
+                            })}
+                        </ul>
+                    </div> 
+                )
+            }
+        }
+            
+            ReactDOM.render(<Users />,rootHandle)
+        </script>
+        
+    </body>
+    </html>

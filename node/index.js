@@ -3,8 +3,9 @@ const configureDB=require('./config/database')
 const router=require('./config/routes')
 const cors=require('cors')
 const app=express()
+const net=require('net')
 const port=3025
-const socket=require('socket.io')
+// const socket=require('socket.io')
 app.use(express.json())
 configureDB()
 app.use(cors())
@@ -13,13 +14,13 @@ app.get('/',(req,res)=>{
 })
 app.use('/',router)
 
-const server=app.listen(port,()=>{
+app.listen(port,()=>{
     console.log('listening on port',port)
 })
 
-const io = socket(server);
+// var server = net.createServer(function(socket) {
+// 	socket.write('Echo server\r\n');
+// 	socket.pipe(socket);
+// });
 
-io.on('connection', (socket) => {
-    console.log('hii')
-    console.log(socket.id);
-});
+// server.listen(1337, '127.0.0.1');
